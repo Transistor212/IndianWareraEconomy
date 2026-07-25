@@ -1,0 +1,500 @@
+/* ============================================================
+   DESIGN TOKENS
+   ============================================================ */
+:root {
+  --bg: #080b11;
+  --bg2: #0d1117;
+  --card: #111827;
+  --card2: #1a2235;
+  --border: #1f2937;
+  --border2: #2d3748;
+  --text: #f0f4ff;
+  --muted: #8b9ab5;
+  --accent: #5865F2;
+  --accent-glow: rgba(88, 101, 242, 0.25);
+  --ok: #22c55e;
+  --ok-bg: rgba(34, 197, 94, 0.1);
+  --warning: #f59e0b;
+  --warning-bg: rgba(245, 158, 11, 0.1);
+  --at-threshold: #f97316;
+  --at-threshold-bg: rgba(249, 115, 22, 0.1);
+  --critical: #ef4444;
+  --critical-bg: rgba(239, 68, 68, 0.1);
+  --gold: #fbbf24;
+  --silver: #94a3b8;
+  --diamond: #67e8f9;
+  --platinum: #e2e8f0;
+  --radius: 14px;
+  --radius-sm: 8px;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 28px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(8, 11, 17, 0.85);
+  backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.logo-mark {
+  font-size: 32px;
+  line-height: 1;
+  filter: drop-shadow(0 0 8px rgba(255,165,0,0.5));
+}
+
+header h1 {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: -0.3px;
+}
+
+.header-sub {
+  font-size: 12px;
+  color: var(--muted);
+  display: block;
+  margin-top: 1px;
+}
+
+#user-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.logout-btn, .discord-btn {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: inherit;
+  transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+  display: inline-block;
+}
+
+.logout-btn:hover, .discord-btn:hover {
+  background: #4752c4;
+  box-shadow: 0 0 12px var(--accent-glow);
+  transform: translateY(-1px);
+}
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+main {
+  padding: 28px;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* ============================================================
+   CARDS
+   ============================================================ */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  transition: border-color 0.2s;
+}
+
+.card:hover { border-color: var(--border2); }
+
+.highlight-card {
+  background: linear-gradient(135deg, #111827 0%, #0f1a2e 100%);
+  border-color: rgba(88, 101, 242, 0.3);
+  box-shadow: 0 0 30px rgba(88, 101, 242, 0.08);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.card-header h2 {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.card-header h2 .icon { font-size: 15px; }
+
+/* ============================================================
+   BADGES
+   ============================================================ */
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+.badge.muted { background: var(--card2); color: var(--muted); }
+.badge.ok { background: var(--ok-bg); color: var(--ok); }
+.badge.warn { background: var(--warning-bg); color: var(--warning); }
+.badge.error { background: var(--critical-bg); color: var(--critical); }
+
+/* ============================================================
+   SUMMARY STATS GRID
+   ============================================================ */
+.summary-grid {
+  display: flex;
+  gap: 0;
+  margin-bottom: 8px;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 1;
+  padding: 16px 20px;
+  border-radius: var(--radius-sm);
+  background: var(--card2);
+  border: 1px solid var(--border);
+  transition: border-color 0.2s, transform 0.2s;
+  margin-right: 12px;
+}
+
+.stat:last-child { margin-right: 0; }
+
+.stat:hover {
+  border-color: var(--border2);
+  transform: translateY(-2px);
+}
+
+.stat span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.stat strong {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--text);
+}
+
+.stat.primary strong { color: var(--gold); }
+
+/* ============================================================
+   STAT LIST (overview / rankings)
+   ============================================================ */
+.stat-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 9px 12px;
+  border-radius: var(--radius-sm);
+  transition: background 0.15s;
+  gap: 12px;
+}
+
+.stat-row:hover { background: var(--card2); }
+
+.stat-row .label {
+  color: var(--muted);
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+.stat-row .value {
+  font-size: 13px;
+  font-weight: 600;
+  text-align: right;
+}
+
+/* ============================================================
+   TIER BADGES
+   ============================================================ */
+.tier {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+  margin-left: 6px;
+}
+.tier-diamond { background: rgba(103,232,249,0.15); color: var(--diamond); }
+.tier-platinum { background: rgba(226,232,240,0.12); color: var(--platinum); }
+.tier-gold { background: rgba(251,191,36,0.15); color: var(--gold); }
+.tier-silver { background: rgba(148,163,184,0.12); color: var(--silver); }
+.tier-bronze { background: rgba(180,120,60,0.12); color: #cd7f32; }
+
+/* ============================================================
+   RESOURCE CHIPS (strategic resources)
+   ============================================================ */
+.resource-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.resource-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--card2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.resource-chip:hover {
+  border-color: var(--border2);
+  transform: translateY(-1px);
+}
+
+.resource-chip .chip-count {
+  background: var(--accent);
+  color: #fff;
+  border-radius: 4px;
+  padding: 1px 7px;
+  font-size: 11px;
+  font-weight: 700;
+  min-width: 20px;
+  text-align: center;
+}
+
+.resource-chip-empty {
+  color: var(--muted);
+  font-size: 13px;
+  font-style: italic;
+}
+
+/* ============================================================
+   TABLE
+   ============================================================ */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+thead th {
+  text-align: left;
+  padding: 9px 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--muted);
+  font-weight: 500;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+tbody td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.15s;
+}
+
+tbody tr:hover td { background: var(--card2); }
+tbody tr:last-child td { border-bottom: none; }
+
+/* ============================================================
+   MARKET ORDERS
+   ============================================================ */
+.orders-summary {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.order-stat {
+  flex: 1;
+  background: var(--card2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+}
+
+.order-stat .os-label { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+.order-stat .os-value { font-size: 20px; font-weight: 700; margin-top: 4px; }
+.order-stat.buy .os-value { color: var(--ok); }
+.order-stat.sell .os-value { color: var(--warning); }
+.order-stat.locked .os-value { color: var(--accent); }
+
+.orders-table-wrap { overflow-x: auto; }
+
+/* ============================================================
+   WATCHDOG
+   ============================================================ */
+.watchdog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.watchdog-item {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 18px;
+  background: var(--card2);
+  transition: border-color 0.2s;
+}
+
+.watchdog-item.ok { border-color: rgba(34,197,94,0.3); }
+.watchdog-item.warning { border-color: rgba(245,158,11,0.4); }
+.watchdog-item.at-threshold { border-color: rgba(249,115,22,0.4); }
+.watchdog-item.critical {
+  border-color: rgba(239,68,68,0.5);
+  box-shadow: 0 0 16px rgba(239,68,68,0.1);
+  animation: pulse-critical 2s ease-in-out infinite;
+}
+.watchdog-item.unknown { border-color: var(--border2); }
+
+@keyframes pulse-critical {
+  0%, 100% { box-shadow: 0 0 16px rgba(239,68,68,0.1); }
+  50% { box-shadow: 0 0 24px rgba(239,68,68,0.25); }
+}
+
+.watchdog-item h3 { margin: 0 0 10px; font-size: 16px; font-weight: 700; letter-spacing: 0.05em; }
+
+.status-pill {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.status-pill.ok { background: var(--ok-bg); color: var(--ok); }
+.status-pill.warning { background: var(--warning-bg); color: var(--warning); }
+.status-pill.at-threshold { background: var(--at-threshold-bg); color: var(--at-threshold); }
+.status-pill.critical { background: var(--critical-bg); color: var(--critical); }
+.status-pill.unknown { background: rgba(139,154,181,0.1); color: var(--muted); }
+
+.watchdog-item dl {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  row-gap: 6px;
+  font-size: 13px;
+  margin: 0;
+}
+.watchdog-item dt { color: var(--muted); }
+.watchdog-item dd { margin: 0; text-align: right; font-weight: 500; }
+
+/* ============================================================
+   UTILITY
+   ============================================================ */
+.muted { color: var(--muted); font-size: 13px; }
+.warn-text { color: var(--critical); font-size: 13px; }
+
+.no-inventory-notice {
+  background: rgba(88,101,242,0.08);
+  border: 1px solid rgba(88,101,242,0.2);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 16px;
+  line-height: 1.7;
+}
+.no-inventory-notice strong { color: var(--text); }
+
+/* ============================================================
+   LOGIN PAGE
+   ============================================================ */
+body.login-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: radial-gradient(ellipse at 50% 40%, #0d1a3a 0%, var(--bg) 70%);
+}
+
+.login-card {
+  text-align: center;
+  background: var(--card);
+  border: 1px solid rgba(88,101,242,0.3);
+  border-radius: 20px;
+  padding: 48px 40px;
+  max-width: 380px;
+  width: 90%;
+  box-shadow: 0 0 60px rgba(88,101,242,0.12);
+}
+
+.login-card .flag { font-size: 48px; display: block; margin-bottom: 16px; }
+.login-card h1 { font-size: 22px; margin: 0 0 8px; }
+.login-card p { color: var(--muted); margin-bottom: 28px; font-size: 14px; }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 700px) {
+  .two-col { grid-template-columns: 1fr; }
+  .summary-grid { flex-direction: column; gap: 10px; }
+  .stat { margin-right: 0; }
+  main { padding: 16px; gap: 14px; }
+  header { padding: 12px 16px; }
+  .orders-summary { flex-direction: column; }
+}

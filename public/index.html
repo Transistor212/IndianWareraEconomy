@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Real-time India economy dashboard for WarEra — treasury, resources, market orders, and strategic stats." />
+<title>India Economy Tracker — WarEra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <header>
+    <div class="header-left">
+      <div class="logo-mark">🇮🇳</div>
+      <div>
+        <h1>India Economy Tracker</h1>
+        <span class="header-sub">WarEra · Live Dashboard</span>
+      </div>
+    </div>
+    <div id="user-badge"></div>
+  </header>
+
+  <main>
+    <!-- Treasury & Net Worth -->
+    <section class="card highlight-card">
+      <div class="card-header">
+        <h2><span class="icon">💰</span> Treasury & Net Worth</h2>
+        <span id="last-updated" class="badge muted"></span>
+      </div>
+      <div id="economy-summary" class="summary-grid">
+        <div class="stat skeleton"><span>—</span><strong>—</strong></div>
+        <div class="stat skeleton"><span>—</span><strong>—</strong></div>
+        <div class="stat skeleton"><span>—</span><strong>—</strong></div>
+      </div>
+      <div id="game-estimates"></div>
+    </section>
+
+    <!-- Country Stats -->
+    <div class="two-col">
+      <section class="card">
+        <div class="card-header">
+          <h2><span class="icon">🏛️</span> Country Overview</h2>
+        </div>
+        <div id="country-overview" class="stat-list">Loading…</div>
+      </section>
+
+      <section class="card">
+        <div class="card-header">
+          <h2><span class="icon">🏆</span> Rankings</h2>
+        </div>
+        <div id="rankings-list" class="stat-list">Loading…</div>
+      </section>
+    </div>
+
+    <!-- Strategic Resources -->
+    <section class="card">
+      <div class="card-header">
+        <h2><span class="icon">⛏️</span> Strategic Resources</h2>
+      </div>
+      <div id="strategic-resources">Loading…</div>
+    </section>
+
+    <!-- Resource Inventory -->
+    <section class="card">
+      <div class="card-header">
+        <h2><span class="icon">📦</span> Resource Inventory</h2>
+        <span id="inventory-status-badge" class="badge"></span>
+      </div>
+      <table id="resource-table">
+        <thead>
+          <tr><th>Resource</th><th>Quantity</th><th>Avg. Market Price</th><th>Estimated Value</th></tr>
+        </thead>
+        <tbody><tr><td colspan="4" class="muted">Loading…</td></tr></tbody>
+      </table>
+    </section>
+
+    <!-- Market Orders -->
+    <section class="card">
+      <div class="card-header">
+        <h2><span class="icon">🏪</span> Open Market Orders</h2>
+      </div>
+      <div id="market-orders">Loading…</div>
+    </section>
+
+    <!-- Paper & Oil Watchdog -->
+    <section class="card">
+      <div class="card-header">
+        <h2><span class="icon">👁️</span> Paper & Oil Watchdog</h2>
+      </div>
+      <div id="watchdog" class="watchdog-grid">Loading…</div>
+    </section>
+  </main>
+
+  <script src="/dashboard.js"></script>
+</body>
+</html>
