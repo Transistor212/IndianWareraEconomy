@@ -13,7 +13,11 @@ module.exports = {
   discord: {
     clientId: process.env.DISCORD_CLIENT_ID,
     clientSecret: process.env.DISCORD_CLIENT_SECRET,
-    redirectUri: process.env.DISCORD_REDIRECT_URI,
+    // Auto-detect production URL on Railway; falls back to explicit env var or localhost
+    redirectUri: process.env.DISCORD_REDIRECT_URI ||
+      (process.env.RAILWAY_PUBLIC_DOMAIN
+        ? `https://${process.env.RAILWAY_PUBLIC_DOMAIN}/auth/discord/callback`
+        : 'http://localhost:3000/auth/discord/callback'),
     botToken: process.env.DISCORD_BOT_TOKEN,
     guildId: process.env.DISCORD_GUILD_ID,
     allowedRoleIds: splitIds(process.env.ALLOWED_ROLE_IDS),

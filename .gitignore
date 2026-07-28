@@ -1,1 +1,17 @@
+# Environment variables (NEVER commit these)
 .env
+
+# Dependencies
+node_modules/
+
+# SQLite WAL/SHM journal files (generated at runtime, not needed in git)
+*.sqlite-shm
+*.sqlite-wal
+
+# Keep data.sqlite in git as an empty seed database (optional)
+# Uncomment the next line to exclude it too:
+# data.sqlite
+
+# OS files
+.DS_Store
+Thumbs.db
