@@ -142,4 +142,24 @@ router.get('/thresholds', (req, res) => {
   res.json({ thresholds: rows });
 });
 
+/**
+ * Vercel Cron endpoint — called every hour by Vercel's cron scheduler.
+ * Secured with CRON_SECRET so only Vercel can call it.
+ * On Railway/local this is unused (node-cron handles it instead).
+ */
+router.get('/cron/hourly', async (req, res) => {
+  const secret = process.env.CRON_SECRET;
+  if (secret && req.headers['authorization'] !== `Bearer ${secret}`) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
+  try {
+    const { runHourlyJob } = require('../scheduler');
+    await runHourlyJob();
+    res.json({ ok: true, ran: new Date().toISOString() });
+  } catch (err) {
+    console.error('[cron/hourly] failed:', err.message);
+    res.status(500).json({ error: err.message });
+  }
+});
+
 module.exports = router;
