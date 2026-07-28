@@ -1,20 +1,9 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "server/index.js",
-      "use": "@vercel/node",
-      "config": {
-        "includeFiles": ["server/**", "public/**"],
-        "maxLambdaSize": "50mb"
-      }
-    }
-  ],
-  "routes": [
-    { "src": "/style.css",     "dest": "/public/style.css" },
-    { "src": "/dashboard.js",  "dest": "/public/dashboard.js" },
-    { "src": "/login.html",    "dest": "/public/login.html" },
-    { "src": "/(.*)",          "dest": "/server/index.js" }
+  "rewrites": [
+    { "source": "/auth/:path*",      "destination": "/api/index" },
+    { "source": "/api/:path*",       "destination": "/api/index" },
+    { "source": "/",                 "destination": "/api/index" },
+    { "source": "/index.html",       "destination": "/api/index" }
   ],
   "crons": [
     {
