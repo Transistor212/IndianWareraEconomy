@@ -34,8 +34,9 @@ router.get('/discord/callback', async (req, res) => {
 
     res.redirect('/');
   } catch (err) {
-    console.error('[auth] callback failed:', err);
-    res.status(500).send('Login failed. Please try again.');
+    console.error('[auth] callback failed:', err.message, err.stack);
+    // Show the actual error so we can diagnose — remove detail after debugging
+    res.status(500).send(`Login failed: ${err.message}`);
   }
 });
 

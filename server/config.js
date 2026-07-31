@@ -13,11 +13,17 @@ module.exports = {
   discord: {
     clientId: process.env.DISCORD_CLIENT_ID,
     clientSecret: process.env.DISCORD_CLIENT_SECRET,
-    // Auto-detect production URL on Railway; falls back to explicit env var or localhost
+    // Auto-detect the redirect URI:
+    //   1. Explicit env var (highest priority — use this on Vercel with custom domain)
+    //   2. Vercel auto-provides VERCEL_URL for each deployment
+    //   3. Railway provides RAILWAY_PUBLIC_DOMAIN
+    //   4. Fall back to localhost for local dev
     redirectUri: process.env.DISCORD_REDIRECT_URI ||
-      (process.env.RAILWAY_PUBLIC_DOMAIN
-        ? `https://${process.env.RAILWAY_PUBLIC_DOMAIN}/auth/discord/callback`
-        : 'http://localhost:3000/auth/discord/callback'),
+      (process.env.VERCEL_URL
+        ? `https://${process.env.VERCEL_URL}/auth/discord/callback`
+        : process.env.RAILWAY_PUBLIC_DOMAIN
+          ? `https://${process.env.RAILWAY_PUBLIC_DOMAIN}/auth/discord/callback`
+          : 'http://localhost:3000/auth/discord/callback'),
     botToken: process.env.DISCORD_BOT_TOKEN,
     guildId: process.env.DISCORD_GUILD_ID,
     allowedRoleIds: splitIds(process.env.ALLOWED_ROLE_IDS),
