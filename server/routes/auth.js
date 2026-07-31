@@ -1,6 +1,20 @@
 const express = require('express');
 const router = express.Router();
 const discordAuth = require('../discordAuth');
+const config = require('../config');
+
+// Temporary debug route — shows masked config so we can verify env vars loaded correctly
+router.get('/debug', (req, res) => {
+  const mask = (s) => s ? `${s.slice(0, 4)}...${s.slice(-4)} (len:${s.length})` : 'NOT SET';
+  res.json({
+    clientId:    mask(config.discord.clientId),
+    clientSecret: mask(config.discord.clientSecret),
+    redirectUri: config.discord.redirectUri,
+    guildId:     config.discord.guildId,
+    VERCEL_URL:  process.env.VERCEL_URL || 'not set',
+    NODE_ENV:    process.env.NODE_ENV || 'not set',
+  });
+});
 
 router.get('/discord', (req, res) => {
   res.redirect(discordAuth.getAuthorizeUrl());
