@@ -46,7 +46,20 @@ router.get('/discord/callback', async (req, res) => {
       roles: member.roles || [],
     };
 
-    res.redirect('/');
+    // Use HTML redirect instead of res.redirect() — Vercel's proxy can drop
+    // Set-Cookie headers on 302 responses, causing an infinite login loop.
+    res.send(`<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="refresh" content="0;url=/">
+  <title>Logging in...</title>
+</head>
+<body style="font-family:sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;background:#0f1117;color:#fff">
+  <p>Logging in... <a href="/" style="color:#5865f2">click here</a> if not redirected.</p>
+  <script>window.location.href = '/';</script>
+</body>
+</html>`);
   } catch (err) {
     console.error('[auth] callback failed:', err.message, err.stack);
     // Show the actual error so we can diagnose — remove detail after debugging

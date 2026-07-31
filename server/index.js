@@ -11,6 +11,9 @@ const adminRoutes = require('./routes/admin');
 
 const app = express();
 
+// Trust Vercel's proxy so Express sees correct protocol (HTTPS) for secure cookies
+app.set('trust proxy', 1);
+
 app.use(express.json());
 app.use(
   cookieSession({
